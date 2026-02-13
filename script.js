@@ -7,13 +7,21 @@ let user = {
 };
 
 function showSection(sectionId) {
-  document.getElementById("landing").style.display = "none";
-  document.getElementById("info").style.display = "none";
-  document.getElementById("questions").style.display = "none";
-  document.getElementById("results").style.display = "none";
+  const sections = ["landing", "info", "questions", "results"];
 
-  document.getElementById(sectionId).style.display = "block";
+  sections.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = "none";
+    }
+  });
+
+  const active = document.getElementById(sectionId);
+  if (active) {
+    active.style.display = "block";
+  }
 }
+
 function saveBasicInfo() {
   user.name = document.getElementById("name").value;
   user.age = document.getElementById("age").value;
@@ -89,4 +97,4 @@ function getDateIdeas() {
 
   return ideas.slice(0,3);
 }
-showSection("results");
+showSection("landing");
