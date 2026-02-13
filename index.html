@@ -1,22 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowYourKappal.com</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
 <body>
 
-<section id="landing">
-  <h1 class="main-title">KnowYourKappal</h1>
-  <p>Situationship, Relationship, Textationship...<br>Having doubts on what ship you're sailing?<br>NO WORRIESSSS<br>This valentine's day, find love, dodge red flags,<br>and discover your relationship personality-all in one place.<br>Because compatibility is more than just "we both like coffee"</p>
-  <button onclick="showSection('info')">Start Compatibility Test</button>
-</section>
+  <!-- LANDING SECTION -->
+  <section id="landing">
 
-<section id="info" style="display:none;">
-  <!-- basic info form -->
-</section>
+    <img src="logo.png" alt="KnowYourKappal Logo" class="logo">
 
-<section id="questions" style="display:none;">
-  <!-- questionnaire -->
-</section>
+    <h1 class="main-title">KnowYourKappal.com</h1>
 
-<section id="results" style="display:none;">
-  <!-- results -->
-</section>
+    <div class="card intro-card">
+      <p class="description">
+        Situationship, Relationship, Textationship...<br>
+        Having doubts on what ship you're sailing?<br>
+        <strong>NO WORRIESSSS</strong><br><br>
+        This Valentine’s Day, find love, dodge red flags, separate the green flags,<br>
+        and discover your relationship personality — all in one place.<br>
+        Because compatibility is more than just "we both like coffee".
+      </p>
 
-<script src="script.js"></script>
+      <button class="btn btn-primary" onclick="showSection('info')">Find Your One &lt;3</button>
+    </div>
+
+  </section>
+
+
+  <!-- INFO SECTION -->
+  <section id="info" style="display:none;">
+    <div class="card">
+      <h2>Tell Us About You!</h2>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your Name">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" placeholder="18+">
+      </div>
+
+      <div class="form-group">
+        <label for="goal">Relationship Goal</label>
+        <select id="goal">
+          <option value="">Select...</option>
+          <option value="long-term">Long Term Relationship</option>
+          <option value="short-term">Short Term Fun</option>
+          <option value="friends">Just Friends</option>
+          <option value="marriage">Marriage</option>
+          <option value="unsure">Figuring it out</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Interests (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="interest" value="music"> Music</label>
+          <label><input type="checkbox" name="interest" value="movies"> Movies</label>
+          <label><input type="checkbox" name="interest" value="sports"> Sports</label>
+          <label><input type="checkbox" name="interest" value="travel"> Travel</label>
+          <label><input type="checkbox" name="interest" value="food"> Foodie</label>
+          <label><input type="checkbox" name="interest" value="gaming"> Gaming</label>
+          <label><input type="checkbox" name="interest" value="art"> Art</label>
+          <label><input type="checkbox" name="interest" value="reading"> Reading</label>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="saveBasicInfo()">Next Step ➜</button>
+    </div>
+  </section>
+
+  <!-- QUESTIONS SECTION -->
+  <section id="questions" style="display:none;">
+    <div class="card">
+      <h2>Compatibility Check</h2>
+      <p class="subtitle">Rate from 1 (Strongly Disagree) to 5 (Strongly Agree)</p>
+
+      <form id="quiz-form">
+        <div class="question-item">
+          <p>1. I enjoy deep conversations about feelings and future.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q1" value="1"></label>
+            <label>2<input type="radio" name="q1" value="2"></label>
+            <label>3<input type="radio" name="q1" value="3"></label>
+            <label>4<input type="radio" name="q1" value="4"></label>
+            <label>5<input type="radio" name="q1" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>2. I prioritize my partner over my friends usually.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q2" value="1"></label>
+            <label>2<input type="radio" name="q2" value="2"></label>
+            <label>3<input type="radio" name="q2" value="3"></label>
+            <label>4<input type="radio" name="q2" value="4"></label>
+            <label>5<input type="radio" name="q2" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>3. It's important to have independent hobbies and time alone.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q3" value="1"></label>
+            <label>2<input type="radio" name="q3" value="2"></label>
+            <label>3<input type="radio" name="q3" value="3"></label>
+            <label>4<input type="radio" name="q3" value="4"></label>
+            <label>5<input type="radio" name="q3" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>4. I tend to get jealous easily when my partner talks to others.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q4" value="1"></label>
+            <label>2<input type="radio" name="q4" value="2"></label>
+            <label>3<input type="radio" name="q4" value="3"></label>
+            <label>4<input type="radio" name="q4" value="4"></label>
+            <label>5<input type="radio" name="q4" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>5. I believe financial responsibilities should be shared 50/50.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q5" value="1"></label>
+            <label>2<input type="radio" name="q5" value="2"></label>
+            <label>3<input type="radio" name="q5" value="3"></label>
+            <label>4<input type="radio" name="q5" value="4"></label>
+            <label>5<input type="radio" name="q5" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>6. I am ready to commit to a serious long-term relationship.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q6" value="1"></label>
+            <label>2<input type="radio" name="q6" value="2"></label>
+            <label>3<input type="radio" name="q6" value="3"></label>
+            <label>4<input type="radio" name="q6" value="4"></label>
+            <label>5<input type="radio" name="q6" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>7. Public Displays of Affection (PDA) make me uncomfortable.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q7" value="1"></label>
+            <label>2<input type="radio" name="q7" value="2"></label>
+            <label>3<input type="radio" name="q7" value="3"></label>
+            <label>4<input type="radio" name="q7" value="4"></label>
+            <label>5<input type="radio" name="q7" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>8. I trust my partner completely, even if they stay out late.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q8" value="1"></label>
+            <label>2<input type="radio" name="q8" value="2"></label>
+            <label>3<input type="radio" name="q8" value="3"></label>
+            <label>4<input type="radio" name="q8" value="4"></label>
+            <label>5<input type="radio" name="q8" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>9. I prefer planning dates in advance rather than being spontaneous.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q9" value="1"></label>
+            <label>2<input type="radio" name="q9" value="2"></label>
+            <label>3<input type="radio" name="q9" value="3"></label>
+            <label>4<input type="radio" name="q9" value="4"></label>
+            <label>5<input type="radio" name="q9" value="5"></label>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <p>10. I am open to trying new hobbies that my partner enjoys.</p>
+          <div class="scale">
+            <label>1<input type="radio" name="q10" value="1"></label>
+            <label>2<input type="radio" name="q10" value="2"></label>
+            <label>3<input type="radio" name="q10" value="3"></label>
+            <label>4<input type="radio" name="q10" value="4"></label>
+            <label>5<input type="radio" name="q10" value="5"></label>
+          </div>
+        </div>
+      </form>
+
+      <button class="btn btn-primary" onclick="saveAnswers()">Analyze Compatibility</button>
+    </div>
+  </section>
+
+  <!-- RESULTS SECTION -->
+  <section id="results" style="display:none;">
+    <div class="card result-card">
+      <h2>Your Results Are In!</h2>
+
+      <div class="score-container">
+        <h3>Compatibility Score</h3>
+        <div class="score-circle">
+          <span id="score-display">0%</span>
+        </div>
+      </div>
+
+      <div class="result-details">
+        <div class="detail-box">
+          <h4>Personality Type</h4>
+          <p id="personality-display" class="highlight-text">Unknown</p>
+        </div>
+
+        <div class="detail-box">
+          <h4>🚩 Flags Detected</h4>
+          <ul id="flags-display">
+            <!-- Dynamic Content -->
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Suggested Dates <3< /h4>
+              <ul id="dates-display">
+                <!-- Dynamic Content -->
+              </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="location.reload()">Start Over</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
+
+</html>
