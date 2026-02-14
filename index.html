@@ -26,16 +26,20 @@
 
     <div class="card intro-card">
       <p class="description">
-        Situationship, Relationship, Textationship...<br>
+        Relationship? Situationship?? Textationship???<br>
         Having doubts on what ship you're sailing?<br>
         <strong>NO WORRIESSSS</strong><br><br>
-        This Valentine’s Day, find love, dodge red flags, separate the green flags,<br>
+        This Valentine’s Day, find love, dodge red flags, <br>
         and discover your relationship personality — all in one place.<br>
         Because compatibility is more than just "we both like coffee".
       </p>
 
       <button class="btn btn-primary" onclick="showSection('info')">Find Your One &lt;3</button>
     </div>
+    <p class="footer-note">
+      Built with ❤️ for TinkHer Hack
+    </p>
+
 
   </section>
 
@@ -80,7 +84,8 @@
         </div>
       </div>
 
-      <button class="btn btn-secondary" onclick="saveBasicInfo()">Next Step ➜</button>
+      <button class="btn btn-secondary" onclick="saveBasicInfo()">Let’s Check Compatibility ➜</button>
+
     </div>
   </section>
 
@@ -90,7 +95,13 @@
       <h2>Compatibility Check</h2>
       <p class="subtitle">Rate from 1 (Strongly Disagree) to 5 (Strongly Agree)</p>
 
-      <form id="quiz-form">
+      <form id="quiz-form" onsubmit="return false;">
+
+        <p id="progress-text">Question 1 of 10</p>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+
         <div class="question-item">
           <p>1. I enjoy deep conversations about feelings and future.</p>
           <div class="scale">
@@ -202,7 +213,8 @@
         </div>
       </form>
 
-      <button class="btn btn-primary" onclick="saveAnswers()">Analyze Compatibility</button>
+      <button class="btn btn-primary" onclick="saveAnswers()">Reveal My Results ❤️</button>
+
     </div>
   </section>
 
@@ -214,10 +226,14 @@
       <div class="score-container">
         <h3>Compatibility Score</h3>
         <div class="score-circle">
+
           <span id="score-display">0%</span>
         </div>
-      </div>
 
+      </div>
+      <div class="score-message">
+        <p id="score-message" class="score-message"></p>
+      </div>
       <div class="result-details">
         <div class="detail-box">
           <h4>Personality Type</h4>
@@ -232,15 +248,16 @@
         </div>
 
         <div class="detail-box">
-          <h4>Suggested Dates <3< /h4>
-              <ul id="dates-display">
-                <!-- Dynamic Content -->
-              </ul>
+          <h4>Suggested Dates ❤️</h4>
+          <ul id="dates-display">
+            <!-- Dynamic Content -->
+          </ul>
         </div>
-      </div>
 
-      <button class="btn btn-secondary" onclick="location.reload()">Start Over</button>
-    </div>
+        <button class="btn btn-secondary" onclick="resetApp()">Start Over</button>
+        <div class="card result-card">
+
+        </div>
   </section>
 
   <script src="script.js"></script>

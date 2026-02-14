@@ -5,24 +5,36 @@ let user = {
   interests: [],
   answers: []
 };
+function updateProgress() {
+  let answered = document.querySelectorAll('input[type="radio"]:checked').length;
+  let progressPercent = (answered / 10) * 100;
+
+  document.getElementById("progress-fill").style.width = progressPercent + "%";
+  document.getElementById("progress-text").textContent =
+    "Answered " + answered + " of 10";
+}
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+  radio.addEventListener("change", updateProgress);
+});
+
 
 // --- Navigation ---
 function showSection(sectionId) {
   const sections = ["landing", "info", "questions", "results"];
 
   sections.forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.style.display = "none";
-    }
+    document.getElementById(id).style.display = "none";
   });
 
-  const active = document.getElementById(sectionId);
-  if (active) {
-    active.style.display = "block";
-    window.scrollTo(0, 0); // Scroll to top
-  }
+  let active = document.getElementById(sectionId);
+  active.style.display = "block";
+  active.style.opacity = 0;
+
+  setTimeout(() => {
+    active.style.opacity = 1;
+  }, 50);
 }
+
 
 // --- Step 1: Basic Info ---
 function saveBasicInfo() {
@@ -84,6 +96,55 @@ function calculateResults() {
   let totalScore = user.answers.reduce((a, b) => a + b, 0);
   let compatibility = Math.round((totalScore / 50) * 100);
 
+  let scoreElement = document.getElementById("score-display");
+  let circle = document.querySelector(".score-circle");
+
+  // Animation Logic
+  let current = 0;
+  let increment = 1;
+  let speed = 20; // 20ms per step
+
+  // If compatibility is 0, just show it
+  if (compatibility === 0) {
+    scoreElement.textContent = "0%";
+  } else {
+    let interval = setInterval(() => {
+      if (current >= compatibility) {
+        clearInterval(interval);
+        current = compatibility;
+      } else {
+        current++;
+      }
+      scoreElement.textContent = current + "%";
+    }, speed);
+  }
+  let messageElement = document.getElementById("score-message");
+
+  if (compatibility >= 80) {
+    messageElement.textContent =
+      "You’re emotionally aligned and relationship-ready! 💚";
+  }
+  else if (compatibility >= 60) {
+    messageElement.textContent =
+      "There’s potential, but communication is key. 💛";
+  }
+  else {
+    messageElement.textContent =
+      "Reflection and growth could strengthen compatibility. ❤️";
+  }
+
+
+  // Color Logic
+  // Green for high compatibility
+  // Yellow for medium
+  // Red for low
+  let color = "#e74c3c"; // Red default
+  if (compatibility >= 80) color = "#2ecc71"; // Green
+  else if (compatibility >= 50) color = "#f1c40f"; // Yellow
+
+  scoreElement.style.color = color;
+  circle.style.border = `5px solid ${color}`;
+
   // 2. Personality Type
   let personality = getPersonality();
 
@@ -92,10 +153,39 @@ function calculateResults() {
 
   // 4. Date Ideas
   let dateIdeas = getDateIdeas();
+  dateIdeas.push("Cozy movie night with your favorite snacks and no phone distractions.");
+  dateIdeas.push("Sunset coffee date at a quiet place with deep conversations.");
+  dateIdeas.push("A spontaneous late-night drive with music and zero plans.");
+  dateIdeas.push("Cook dinner together and turn it into a mini home date.");
+
 
   // --- Update DOM ---
-  document.getElementById("score-display").innerText = compatibility + "%";
-  document.getElementById("personality-display").innerText = personality.type;
+  let personalityText = "";
+  let personalityTitle = personality.type; // Fixed: personality returns an object {type, desc}
+
+  if (personality.type === "The Communicator") {
+    personalityText =
+      "You value honesty, emotional clarity, and deep conversations. You thrive in relationships built on trust and transparency.";
+  }
+  else if (personality.type === "The Independent Trailblazer") { // Fixed: Match string from getPersonality
+    personalityText =
+      "You respect personal space and individuality. You believe strong relationships allow room for growth.";
+  }
+  else if (personality.type === "The Hopeless Romantic") { // Fixed: Match string from getPersonality
+    personalityText =
+      "You love emotional connection and thoughtful gestures. You believe love should be expressed openly and passionately.";
+  }
+  else if (personality.type === "The Planner") {
+    personalityText = "You have a vision and stick to it."
+  }
+  else {
+    personalityText =
+      "You balance logic and emotion well. You adapt easily and value harmony in relationships.";
+  }
+
+  document.getElementById("personality-display").innerHTML =
+    "<strong>" + personalityTitle + "</strong><br>" + personalityText;
+
 
   // Flags
   const flagsList = document.getElementById("flags-display");
@@ -194,5 +284,12 @@ function getDateIdeas() {
   return ideas.sort(() => 0.5 - Math.random()).slice(0, 3);
 }
 
+
+function resetApp() {
+  document.getElementById("quiz-form").reset();
+  document.getElementById("progress-fill").style.width = "0%";
+  document.getElementById("progress-text").textContent = "Question 1 of 10";
+  showSection("landing");
+}
 // Initialize
 showSection("landing");
