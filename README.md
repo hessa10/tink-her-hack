@@ -41,6 +41,8 @@ A compatibility test application for Valentine's Day!
   <img width="584" height="462" alt="image" src="https://github.com/user-attachments/assets/c7f36a4b-77c2-48b8-80eb-2ce7ad4df767" />
 
 ## Architecture Diagram
+<img width="399" height="498" alt="image" src="https://github.com/user-attachments/assets/ae20c420-5998-4fe3-a296-1488c443e539" />
+
 
 
 ## Team - Delulu
